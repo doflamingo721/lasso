@@ -29,7 +29,6 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/selection"
 	"k8s.io/client-go/tools/cache"
-
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -49,7 +48,7 @@ type CacheReader struct {
 }
 
 // Get checks the indexer for the object and writes a copy of it if found
-func (c *CacheReader) Get(_ context.Context, key client.ObjectKey, out client.Object) error {
+func (c *CacheReader) Get(_ context.Context, key client.ObjectKey, out client.Object, opts ...client.GetOption) error {
 	if c.scopeName == apimeta.RESTScopeNameRoot {
 		key.Namespace = ""
 	}
